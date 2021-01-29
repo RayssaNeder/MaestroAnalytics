@@ -18,10 +18,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import br.com.cesar.maestroAnalytics.validation.SKU;
 
 @Entity
 @Table(name = "curso")
@@ -36,9 +39,10 @@ public class Curso implements Serializable {
 	private Long codigo;
 
 	@NotNull
-	@Size(min = 3, max = 20)
+	@Size(min = 3, max = 90)
 	private String nome;
 	
+	@SKU
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String sku;

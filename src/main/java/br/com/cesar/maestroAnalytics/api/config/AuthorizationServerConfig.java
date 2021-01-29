@@ -31,11 +31,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
 				.withClient("angular").secret("root").scopes("read", "write")
-				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(20)
+				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(200000)
 				.refreshTokenValiditySeconds(3600 * 24)
 		.and()
 				.withClient("mobile").secret("mobile").scopes("read")
-				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(20)
+				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(2000000)
 				.refreshTokenValiditySeconds(3600 * 24);
 	}
 	

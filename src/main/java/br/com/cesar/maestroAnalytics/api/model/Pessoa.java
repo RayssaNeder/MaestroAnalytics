@@ -44,8 +44,7 @@ public class Pessoa implements Serializable {
 	//@JsonIgnore
 	@Embedded
 	private Endereco endereco;
-	@Enumerated(EnumType.STRING)
-	private Ocupacao ocupacao;
+	private String ocupacao;
 	
 	
 	
@@ -94,10 +93,11 @@ public class Pessoa implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Ocupacao getOcupacao() {
+	
+	public String getOcupacao() {
 		return ocupacao;
 	}
-	public void setOcupacao(Ocupacao ocupacao) {
+	public void setOcupacao(String ocupacao) {
 		this.ocupacao = ocupacao;
 	}
 	@Override

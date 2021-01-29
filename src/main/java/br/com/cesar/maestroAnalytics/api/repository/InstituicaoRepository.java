@@ -8,6 +8,6 @@ import br.com.cesar.maestroAnalytics.api.model.Instituicao;
 
 public interface InstituicaoRepository extends JpaRepository<Instituicao, Long>{
 
-	Optional<Instituicao> findByCodigo(Long codigo);
+	Optional<Instituicao> findBySku(String sku);
 
 }

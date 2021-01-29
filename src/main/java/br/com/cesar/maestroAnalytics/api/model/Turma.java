@@ -22,6 +22,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.com.cesar.maestroAnalytics.validation.SKU;
+
 @Entity
 @Table(name = "turma")
 public class Turma implements Serializable {
@@ -34,6 +36,11 @@ public class Turma implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
+	@SKU
+	@NotNull
+	@Size(min = 3, max = 20)
+	private String sku;
 
 	@NotNull
 	@Size(min = 3, max = 50)
@@ -73,6 +80,16 @@ public class Turma implements Serializable {
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}	
+	
+	
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
 
 	public List<Aluno> getAlunos() {
 		return alunos;

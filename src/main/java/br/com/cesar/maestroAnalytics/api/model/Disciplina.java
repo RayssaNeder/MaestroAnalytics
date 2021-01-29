@@ -20,6 +20,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.com.cesar.maestroAnalytics.validation.SKU;
+
 @Entity
 //@Table(name = "disciplina")
 public class Disciplina implements Serializable {
@@ -32,6 +34,11 @@ public class Disciplina implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
+	@SKU
+	@NotNull
+	@Size(min = 3, max = 20)
+	private String sku;
 
 	@NotNull
 	@Size(min = 3, max = 20)
@@ -42,6 +49,7 @@ public class Disciplina implements Serializable {
 	@JoinTable(name = "disciplina_turma", joinColumns = @JoinColumn(name = "disciplina_codigo"), inverseJoinColumns = @JoinColumn(name = "turma_codigo"))
 	private List<Turma> turmas = new ArrayList<>();
 
+	
 	@JsonBackReference("cursos")
 	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
 	@JoinTable(name = "curso_disciplina", joinColumns = @JoinColumn(name = "disciplina_codigo"), inverseJoinColumns = @JoinColumn(name = "curso_codigo"))
@@ -79,7 +87,14 @@ public class Disciplina implements Serializable {
 		this.cursos = cursos;
 	}
 
-	
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
