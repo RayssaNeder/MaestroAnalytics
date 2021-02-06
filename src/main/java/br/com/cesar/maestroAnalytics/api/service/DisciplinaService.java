@@ -1,7 +1,6 @@
 package br.com.cesar.maestroAnalytics.api.service;
 
 
-import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cesar.maestroAnalytics.api.model.Curso;
 import br.com.cesar.maestroAnalytics.api.model.Disciplina;
-import br.com.cesar.maestroAnalytics.api.model.Instituicao;
 import br.com.cesar.maestroAnalytics.api.repository.CursoRepository;
 import br.com.cesar.maestroAnalytics.api.repository.DisciplinaRepository;
 
@@ -43,7 +41,7 @@ public class DisciplinaService {
 		 * 
 		 * disciplina.setCurso(cursoExistente.get());
 		 */
-		 
+		//disciplina.getCursos().forEach( (n) -> { System.out.println(n); } );
 		
 		
 		disciplina = disciplinaRepository.save(disciplina);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,17 +14,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.cesar.maestroAnalytics.validation.SKU;
 
 @Entity
 //@Table(name = "disciplina")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Disciplina implements Serializable {
 
 	/**
@@ -44,16 +48,13 @@ public class Disciplina implements Serializable {
 	@Size(min = 3, max = 20)
 	private String nome;
 
-	@JsonBackReference("turmas")
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	@JoinTable(name = "disciplina_turma", joinColumns = @JoinColumn(name = "disciplina_codigo"), inverseJoinColumns = @JoinColumn(name = "turma_codigo"))
+	
+	@OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
 	private List<Turma> turmas = new ArrayList<>();
 
-	
-	@JsonBackReference("cursos")
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	@JoinTable(name = "curso_disciplina", joinColumns = @JoinColumn(name = "disciplina_codigo"), inverseJoinColumns = @JoinColumn(name = "curso_codigo"))
-	private List<Curso> cursos = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "curso_codigo")
+	private Curso curso = new Curso();
 
 	public Long getCodigo() {
 		return codigo;
@@ -79,12 +80,12 @@ public class Disciplina implements Serializable {
 		this.turmas = turmas;
 	}
 
-	public List<Curso> getCursos() {
-		return cursos;
+	public Curso getCurso() {
+		return curso;
 	}
 
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	public String getSku() {

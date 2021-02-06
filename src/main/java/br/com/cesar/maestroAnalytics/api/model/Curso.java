@@ -54,9 +54,8 @@ public class Curso implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Modalidade modalidade;
 
-	@JsonBackReference("disciplinas")
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	@JoinTable(name = "curso_disciplina", joinColumns = @JoinColumn(name = "disciplina_codigo"), inverseJoinColumns = @JoinColumn(name = "curso_codigo"))
+	
+	@OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
 	private List<Disciplina> disciplinas = new ArrayList<>();
 
 	public Long getCodigo() {

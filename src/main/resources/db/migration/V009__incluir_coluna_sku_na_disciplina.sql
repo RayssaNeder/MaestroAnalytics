@@ -1,0 +1,1 @@
+Alter table disciplina Add sku  BIGINT(10) NOT NULL;

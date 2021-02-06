@@ -38,12 +38,13 @@ public class DisciplinaController {
 	private DisciplinaService disciplinaService;
 	
 	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CURSO') and #oauth2.hasScope('read')")
 	public List<Disciplina> listar(){
 		return disciplinasRepository.findAll();
 	}
 	
 	  @PostMapping 
-	  @PreAuthorize("hasAuthority('ROLE_CADASTRAR_DISCIPLINA') and #oauth2.hasScope('write')")
+	  @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CURSO') and #oauth2.hasScope('write')")
 	  public ResponseEntity<Disciplina> criar(@Valid @RequestBody Disciplina disciplina, HttpServletResponse response){ 
 		  Disciplina disciplinaSalva =   disciplinaService.save(disciplina);
 	  

@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -42,10 +43,6 @@ public class Turma implements Serializable {
 	@Size(min = 3, max = 20)
 	private String sku;
 
-	@NotNull
-	@Size(min = 3, max = 50)
-	private String nome;
-
 
 	@Column(name = "data_inicio")
 	private LocalDate dataInicio;
@@ -57,10 +54,10 @@ public class Turma implements Serializable {
 	
 	private StatusTurma status = StatusTurma.NI;
 	
-	@JsonBackReference("disciplinas")
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-	@JoinTable(name = "disciplina_turma", joinColumns = @JoinColumn(name = "turma_codigo"), inverseJoinColumns = @JoinColumn(name = "disciplina_codigo"))
-	private List<Disciplina> disciplinas = new ArrayList<>();
+
+
+	@JoinColumn(name = "disciplina_codigo")
+	private Disciplina disciplina = new Disciplina();
 
 
 	@JsonBackReference("alunos")
@@ -131,20 +128,12 @@ public class Turma implements Serializable {
 		this.status = status;
 	}
 
-	public String getNome() {
-		return nome;
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 	public List<Professor> getProfessores() {
