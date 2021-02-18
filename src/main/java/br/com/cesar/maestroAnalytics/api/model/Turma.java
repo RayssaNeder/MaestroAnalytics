@@ -55,7 +55,9 @@ public class Turma implements Serializable {
 	private StatusTurma status = StatusTurma.NI;
 	
 
-
+	
+	@NotNull(message = "Disciplina é obrigatória")
+	@ManyToOne
 	@JoinColumn(name = "disciplina_codigo")
 	private Disciplina disciplina = new Disciplina();
 

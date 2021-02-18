@@ -25,4 +25,8 @@ public class PessoaService {
 		
 	}
 
+	public Pessoa findByCpf(String cpf) {
+		return pessoaRepository.findByCpf(cpf);
+	}
+
 }

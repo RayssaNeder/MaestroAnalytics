@@ -49,9 +49,10 @@ public class Disciplina implements Serializable {
 	private String nome;
 
 	
-	@OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "disciplina")
 	private List<Turma> turmas = new ArrayList<>();
 
+	@NotNull(message = "O Curso é obrigatório")
 	@ManyToOne
 	@JoinColumn(name = "curso_codigo")
 	private Curso curso = new Curso();

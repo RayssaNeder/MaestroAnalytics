@@ -2,6 +2,8 @@ package br.com.cesar.maestroAnalytics.api.service;
 
 
 
+import java.util.Optional;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,26 +31,23 @@ public class DisciplinaService {
 	@Transactional
 	public Disciplina save(Disciplina disciplina) {
 		
-		
-		
-		//Optional<Disciplina> cursoExistente = disciplinaRepository.findBySku(disciplina.getSku());
+	
+		Optional<Curso> cursoExistente = cursoRepository.findBySku(disciplina.getCurso().getSku());
 		  
-		/*
-		 * if(!cursoExistente.isPresent()) {;
-		 * log.error("Erro de sistema- NÃO EXISTE CURSO COM O CODIGO: " +
-		 * disciplina.getCurso().getSku() + " - " + disciplina.getCurso().getNome()); }
-		 * 
-		 * 
-		 * disciplina.setCurso(cursoExistente.get());
-		 */
-		//disciplina.getCursos().forEach( (n) -> { System.out.println(n); } );
+		
+		  if(!cursoExistente.isPresent()) {;
+		  log.error("Erro de sistema- NÃO EXISTE CURSO COM O CODIGO: " +
+		  disciplina.getCurso().getSku() + " - " + disciplina.getCurso().getNome()); }
+		  
+		  
+		  disciplina.setCurso(cursoExistente.get());
 		
 		
 		disciplina = disciplinaRepository.save(disciplina);
 		return disciplina;
 	}
 
-	public Curso findBySku(String sku) {
+	public Optional<Curso> findBySku(String sku) {
 		return cursoRepository.findBySku(sku);
 		
 	}

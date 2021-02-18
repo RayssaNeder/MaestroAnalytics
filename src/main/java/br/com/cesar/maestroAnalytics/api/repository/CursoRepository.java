@@ -9,11 +9,11 @@ import br.com.cesar.maestroAnalytics.api.model.Instituicao;
 
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 
-	Curso findBySku(String sku);
+	Optional<Curso> findBySku(String sku);
 
 	@Transactional
 	void deleteBySku(String sku);
 
-	Optional<Curso> findByCodigo(String sku);
+	Optional<Curso> findByCodigo(Long codigo);
 
 }

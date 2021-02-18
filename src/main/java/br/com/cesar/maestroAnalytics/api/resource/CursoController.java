@@ -1,6 +1,7 @@
 package br.com.cesar.maestroAnalytics.api.resource;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -83,12 +84,12 @@ public class CursoController {
 	  @GetMapping ("/{sku}")
 	  @PreAuthorize("hasAuthority('ROLE_PESQUISAR_CURSO') and #oauth2.hasScope('read')")
 	  public ResponseEntity<Curso> buscar(@Valid @PathVariable String sku, HttpServletResponse response){ 
-		  Curso cursoSalvo =   cursoService.findBySku(sku);
+		  Optional<Curso> cursoSalvo =   cursoService.findBySku(sku);
 	  
 	  publisher.publishEvent(new ResourceCreatedEvent(this, response,
-			  cursoSalvo.getCodigo()));
+			  cursoSalvo.get().getCodigo()));
 	  
-	  return ResponseEntity.status(HttpStatus.CREATED).body(cursoSalvo); 
+	  return ResponseEntity.status(HttpStatus.CREATED).body(cursoSalvo.get()); 
 	  }
 	  
 	 

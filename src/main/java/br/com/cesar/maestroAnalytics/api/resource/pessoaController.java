@@ -76,6 +76,17 @@ public class pessoaController {
 	  return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva); 
 	  }
 	  
+	  @GetMapping ("/cpf/{cpf}")
+	  @PreAuthorize("hasAuthority('ROLE_PESQUISAR_CURSO') and #oauth2.hasScope('read')")
+	  public ResponseEntity<Pessoa> buscarPorCpf(@Valid @PathVariable String cpf, HttpServletResponse response){ 
+		  Pessoa pessoaSalva =   pessoaService.findByCpf(cpf);
+	  
+	  publisher.publishEvent(new ResourceCreatedEvent(this, response,
+			  pessoaSalva.getCodigo()));
+	  
+	  return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva); 
+	  }
+	  
 	  @PutMapping ("/{codigo}")
 	  @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CURSO') and #oauth2.hasScope('write')")
 	  public ResponseEntity<Pessoa> atualizar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response){ 

@@ -23,6 +23,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.cesar.maestroAnalytics.validation.SKU;
 
@@ -55,7 +57,8 @@ public class Curso implements Serializable {
 	private Modalidade modalidade;
 
 	
-	@OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "curso")
+	@JsonIgnore
 	private List<Disciplina> disciplinas = new ArrayList<>();
 
 	public Long getCodigo() {

@@ -1,0 +1,1 @@
+ALTER TABLE disciplina MODIFY sku VARCHAR(6)NOT NULL;

@@ -13,4 +13,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>  {
 	@Transactional
 	void deleteByCodigo(Long sku);
 
+	Pessoa findByCpf(String cpf);
+
 }

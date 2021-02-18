@@ -1,0 +1,1 @@
+Alter table turma Add status  VARCHAR(2) NOT NULL;

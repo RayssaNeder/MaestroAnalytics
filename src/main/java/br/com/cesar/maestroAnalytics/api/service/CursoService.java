@@ -55,7 +55,7 @@ public class CursoService {
 		return curso;
 	}
 
-	public Curso findBySku(String sku) {
+	public Optional<Curso> findBySku(String sku) {
 		return cursoRepository.findBySku(sku);
 		
 	}
